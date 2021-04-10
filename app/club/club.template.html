@@ -1,0 +1,16 @@
+<div class="row p-2">
+    <div class="card col-8" style="background: transparent; border: 0px;">
+        <h4 class="card-title">{{$ctrl.inData.strTeam}}</h4>
+        <hr>
+        <h5 class="card-subtitle">Rank : {{$ctrl.inData.ranking}}</h5>
+        <h5 class="card-subtitle">Score : {{$ctrl.inData.score}}</h5>
+        <hr>
+        <h6 class="card-subtitle">Stadium : {{$ctrl.inData.strStadium}}</h6>
+        <h6 class="card-subtitle">Town : {{$ctrl.inData.strStadiumLocation}}</h6>
+    </div>
+    <div class="col-4">
+        <div class="card p-2" style="border-radius: 20%; background: rgba(0,0,0,0.2)">
+            <img ng-src="{{$ctrl.inData.strTeamBadge+'/preview'}}" class="" style="max-height: 100%;" width=100%/>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+</head>
+<body ng-app="myApp.statistics">
+<div class="container justify-content-center align-items-center h-100 p-3">
+    <div ng-show="show==-1"  class="row justify-content-center align-items-center">
+        <img src="wait.gif" alt="waiting animated icon" style="max-height: 600px; max-width: 600px">
+    </div>
+    <div ng-show="show==1 || show==2 || show==0" class="container">
+        <div class="row align-items-center">
+            <div class="col-1">
+                <button class="border-0" style="background-color:transparent" ng-click="turn(-1)">
+                    <i class="fa fa-3x fa-angle-left"></i>
+                </button>
+            </div>
+            <div class="container col-10">
+                <div class="table-responsive" ng-show="show==0">
+                    <canvas ng-show="show==0" id="diffChart" width="800" height="600"></canvas>
+                </div>
+                <div class="table-responsive" ng-show="show==1">
+                    <canvas ng-show="show==1" id="forChart" width="800" height="600"></canvas>
+                </div>
+                <div class="table-responsive" ng-show="show==2">
+                    <canvas ng-show="show==2" id="againstChart" width="800" height="600"></canvas>
+                </div>
+            </div>
+            <div class="col-1">
+                <button class="border-0" style="background-color:transparent" ng-click="turn(1)">
+                    <i class="fa fa-3x fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

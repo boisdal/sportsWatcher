@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body ng-app='myApp'>
+<script src="results.js"></script>
+<div class="container p-2 d-block d-md-none"><div class="toggle-vis card col-3 p-2">details</div></div>
+<div class="container col-10 mt-5 border rounded">
+    <div class="table-responsive">
+        <table id="rankingTable" class="table-striped table-hover responsive">
+            <thead class="thead-light">
+            <tr>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Won</th>
+                <th>Draw</th>
+                <th>Lost</th>
+                <th>Scored</th>
+                <th>Took</th>
+                <th>Diffs</th>
+                <th>Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="club in ranking">
+                <td class="col-2">
+                    <div class="row">
+                        <div class="col-1 d-none d-md-block">
+                            <button class="border-0" style="background-color:transparent" ng-click="cat($index)" ng-show="show!=$index">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <button class="border-0" style="background-color:transparent" ng-click="hide()" ng-show="show==$index">
+                                <i class="fa fa-angle-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-lg-2" ng-show="show!=$index">
+                            <img class="blason" ng-src="{{club.club.strTeamBadge+'/preview'}}" width=100%>
+                        </div>
+                        <div class="col-4" ng-show="show!=$index">{{club.name}}</div>
+                        <div class="container" ng-show="show==$index">
+                            <club in-data=club.club></club>
+                        </div>
+                    </div>
+                </td>
+                <td>{{club.played}}</td>
+                <td>{{club.win}}</td>
+                <td>{{club.draw}}</td>
+                <td>{{club.loss}}</td>
+                <td>{{club.goalsfor}}</td>
+                <td>{{club.goalsagainst}}</td>
+                <td>{{club.goalsdifference}}</td>
+                <td>{{club.total}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

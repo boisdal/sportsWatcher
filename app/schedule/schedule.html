@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule</title>
+</head>
+<body ng-app="myApp">
+<div ng-controller="ScheduleCtrl" class="container col-10 mt-5 border rounded">
+    <div class="row align-self-center justify-content-center">
+        <div class="col-auto">
+            <button class="border-0" style="background-color:transparent" ng-click="turn(-1)">
+                <i class="fa fa-angle-left"></i>
+            </button>
+        </div>
+        <div class="col-auto" ng-show="titleShow==0">Next 15 Matches</div>
+        <div class="col-auto" ng-show="titleShow==1">Last 15 Matches</div>
+        <div class="col-auto">
+            <button class="border-0" style="background-color:transparent" ng-click="turn(1)">
+                <i class="fa fa-angle-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive" ng-show="titleShow==0">
+        <table class="table table-striped table-hover">
+            <thead class="thead-light">
+            <tr>
+                <td>Home</td>
+                <td>Away</td>
+                <td>Date</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="match in upcoming15" class="justify-content-center">
+                <td width="40%">
+                    <div class="row">
+                        <div class="col-1 d-none d-md-block">
+                            <button class="border-0" style="background-color:transparent" ng-click="cat($index)" ng-show="show!=$index">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <button class="border-0" style="background-color:transparent" ng-click="hide()" ng-show="show==$index">
+                                <i class="fa fa-angle-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-lg-2" ng-show="show!=$index">
+                            <img class="blason" ng-src="{{match.homeTeam.strTeamBadge+'/preview'}}">
+                        </div>
+                        <div class="col-6" ng-show="show!=$index">{{match.strHomeTeam}}</div>
+                        <div class="container" ng-show="show==$index">
+                            <club in-data=match.homeTeam></club>
+                        </div>
+                    </div>
+                </td>
+                <td width="40%">
+                    <div class="row">
+                        <div class="col-1 d-none d-md-block">
+                            <button class="border-0" style="background-color:transparent" ng-click="cat($index)" ng-show="show!=$index">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <button class="border-0" style="background-color:transparent" ng-click="hide()" ng-show="show==$index">
+                                <i class="fa fa-angle-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-lg-2" ng-show="show!=$index">
+                            <img class="blason" ng-src="{{match.awayTeam.strTeamBadge+'/preview'}}">
+                        </div>
+                        <div class="col-6" ng-show="show!=$index">{{match.strAwayTeam}}</div>
+                        <div class="container" ng-show="show==$index">
+                            <club in-data=match.awayTeam></club>
+                        </div>
+                    </div>
+                </td>
+                <td width="20%">{{match.dateEvent}}  |  {{match.strTimeLocal}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive" ng-show="titleShow==1">
+        <table class="table table-striped table-hover">
+            <thead class="thead-light">
+            <tr>
+                <td>Home</td>
+                <td>Score</td>
+                <td>Away</td>
+                <td>Date</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="match in last15">
+                <td width="33%">
+                    <div class="row">
+                        <div class="col-1 d-none d-md-block">
+                            <button class="border-0" style="background-color:transparent" ng-click="cat($index)" ng-show="show!=$index">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <button class="border-0" style="background-color:transparent" ng-click="hide()" ng-show="show==$index">
+                                <i class="fa fa-angle-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-lg-2" ng-show="show!=$index">
+                            <img class="blason" ng-src="{{match.homeTeam.strTeamBadge+'/preview'}}">
+                        </div>
+                        <div class="col-6" ng-show="show!=$index">{{match.strHomeTeam}}</div>
+                        <div class="container" ng-show="show==$index">
+                            <club in-data=match.homeTeam></club>
+                        </div>
+                    </div>
+                </td>
+                <td width="17%">
+                    {{match.intHomeScore}}  -  {{match.intAwayScore}}
+                </td>
+                <td width="33%">
+                    <div class="row">
+                        <div class="col-1 d-none d-md-block">
+                            <button class="border-0" style="background-color:transparent" ng-click="cat($index)" ng-show="show!=$index">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <button class="border-0" style="background-color:transparent" ng-click="hide()" ng-show="show==$index">
+                                <i class="fa fa-angle-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-lg-2" ng-show="show!=$index">
+                            <img class="blason" ng-src="{{match.awayTeam.strTeamBadge+'/preview'}}">
+                        </div>
+                        <div class="col-6" ng-show="show!=$index">{{match.strAwayTeam}}</div>
+                        <div class="container" ng-show="show==$index">
+                            <club in-data=match.awayTeam></club>
+                        </div>
+                    </div>
+                </td>
+                <td width="16%">{{match.dateEvent}}  |  {{match.strTimeLocal}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

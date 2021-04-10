@@ -1,0 +1,15 @@
+.navbar {
+  height: 10%!important;
+  max-height: 10%!important;
+  min-height: 10%!important;
+}
+
+.blason {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 40px;
+  max-width: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
