@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Rugby Watcher</title>
+  <title>Sports Watcher</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
@@ -25,20 +25,22 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-colvis-1.6.5/b-html5-1.6.5/b-print-1.6.5/fc-3.3.2/r-2.2.6/datatables.min.js"></script>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 </head>
-<body>
+<body ng-controller="MainCtrl">
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-    <a class="navbar-brand" href="#">
-      <img src="https://www.thesportsdb.com/images/media/league/logo/wyytyy1452903275.png" alt="logoTop14" style="max-width: 200px">
+  <div class="dropdown">
+    <a class="navbar-brand dropdown-toggle" role="button" data-toggle="dropdown" id="dropdownMenu">
+      <img ng-src="{{league.icon}}" alt="logoTop14" class="banner">
     </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+      <a ng-repeat="lea in leagues" class="dropdown-item" ng-class="{disabled: lea == league}" ng-click="setLeague($index)">
+        <img ng-src="{{lea.icon}}" alt="logo{{lea.name}}" class="banner">
+      </a>
+    </div>
+  </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

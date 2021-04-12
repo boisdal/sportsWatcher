@@ -13,3 +13,8 @@
   min-width: 40px;
   min-height: 40px;
 }
+
+.banner {
+  background-color: #ffffff;
+  max-width: 200px;
+}
