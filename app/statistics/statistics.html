@@ -5,20 +5,35 @@
     <title>Statistics</title>
 </head>
 <body ng-app="myApp.statistics">
-<div class="container justify-content-center align-items-center h-100 p-3">
-    <div ng-show="show==1 || show==2 || show==0" class="container">
+<div class="container justify-content-center align-items-center h-100 px-0 py-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-1 d-block d-lg-none">
+                <button class="border-0" style="background-color:transparent" ng-click="turn(-1)">
+                    <i class="fa fa-2x fa-angle-left"></i>
+                </button>
+            </div>
+            <div class="col-8 text-center" ng-repeat="gra in graphs" ng-show="show==$index">
+                {{gra.title}}
+            </div>
+            <div class="col-1 d-block d-lg-none">
+                <button class="border-0" style="background-color:transparent" ng-click="turn(1)">
+                    <i class="fa fa-2x fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
         <div class="row align-items-center">
-            <div class="col-1">
+            <div class="col-1 d-none d-lg-block">
                 <button class="border-0" style="background-color:transparent" ng-click="turn(-1)">
                     <i class="fa fa-3x fa-angle-left"></i>
                 </button>
             </div>
-            <div class="container col-10">
+            <div class="container col">
                 <div class="table-responsive" ng-repeat="gra in graphs" ng-show="show==$index">
-                    <canvas ng-show="show==$index" id="{{ 'chart-' + $index }}" width="800" height="600"></canvas>
+                    <canvas ng-show="show==$index" id="{{ 'chart-' + $index }}" width="900" height="600"></canvas>
                 </div>
             </div>
-            <div class="col-1">
+            <div class="col-1 d-none d-lg-block">
                 <button class="border-0" style="background-color:transparent" ng-click="turn(1)">
                     <i class="fa fa-3x fa-angle-right"></i>
                 </button>

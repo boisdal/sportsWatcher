@@ -2,6 +2,23 @@
   height: 10%!important;
   max-height: 10%!important;
   min-height: 10%!important;
+  background-color: #191923;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td {
+  background-color: #f2f6df!important;
+}
+
+.table-striped > tbody > tr:hover {
+  background-color: #bcd8c1!important;
+}
+
+.nav-link {
+  color: #f2f6df;
+}
+
+.nav-link:hover {
+  color: #bcd8c1;
 }
 
 .blason {

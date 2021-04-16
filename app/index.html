@@ -25,12 +25,21 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-colvis-1.6.5/b-html5-1.6.5/b-print-1.6.5/fc-3.3.2/r-2.2.6/datatables.min.js"></script>
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=3ewkwRr3KO">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=3ewkwRr3KO">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png?v=3ewkwRr3KO">
+  <link rel="manifest" href="/icons/site.webmanifest?v=3ewkwRr3KO">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg?v=3ewkwRr3KO" color="#439a86">
+  <link rel="shortcut icon" href="/icons/favicon.ico?v=3ewkwRr3KO">
+  <meta name="apple-mobile-web-app-title" content="Sports Watcher">
+  <meta name="application-name" content="Sports Watcher">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="msapplication-config" content="/icons/browserconfig.xml?v=3ewkwRr3KO">
+  <meta name="theme-color" content="#191923">
 </head>
 <body ng-controller="MainCtrl">
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+<nav class="navbar navbar-expand-lg" >
   <div class="dropdown">
     <a class="navbar-brand dropdown-toggle" role="button" data-toggle="dropdown" id="dropdownMenu">
       <img ng-src="{{league.icon}}" alt="logoTop14" class="banner">
@@ -68,7 +77,7 @@
 
   <div ng-view class="h-100"></div>
 
-  <div>Rugby Watcher app: v<span app-version></span></div>
+  <div>Sports Watcher app: v<span app-version></span></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
