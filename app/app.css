@@ -5,11 +5,15 @@
   background-color: #191923;
 }
 
-.table-striped > tbody > tr:nth-child(2n+1) > td {
-  background-color: #f2f6df!important;
+.table-striped-custom > tbody > tr:nth-child(4n+1) > td {
+  background-color: #f2f6df;
 }
 
-.table-striped > tbody > tr:hover {
+.table-striped-custom > tbody > tr:nth-child(4n+1):hover > td {
+  background-color: transparent;
+}
+
+.table-striped-custom > tbody > tr:hover {
   background-color: #bcd8c1!important;
 }
 
@@ -29,6 +33,15 @@
   max-width: 40px;
   min-width: 40px;
   min-height: 40px;
+}
+
+.img-overlay {
+  position: relative!important;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
 }
 
 .banner {

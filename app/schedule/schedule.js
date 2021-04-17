@@ -26,7 +26,8 @@ angular.module('myApp.schedule', ['ngRoute'])
     .controller('ScheduleCtrl', function ($scope, mainService, $http) {
         function loadPage($scope, $http) {
             $scope.titleShow = 1;
-            console.log($scope.league)
+            $scope.mshow = -1;
+            $scope.col = -1;
             $http.get(`https://www.thesportsdb.com/api/v1/json/${mainService.getKey()}/lookuptable.php?l=${$scope.league.id}&s=2020-2021`).then(
                 function successCallback(response) {
                     $scope.ranking = response.data.table;
@@ -41,20 +42,20 @@ angular.module('myApp.schedule', ['ngRoute'])
                     $scope.response = response;
                     $scope.upcoming15 = response.data.events;
                     for (let match of $scope.upcoming15) {
-                        $http.get(`https://thesportsdb.com/api/v1/json/${mainService.getKey()}/lookupteam.php?id=${match.idHomeTeam}`).then(
+                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idHomeTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
-                                match.homeTeam = response.data.teams[0];
+                                match.homeTeam = response.data.data;
                                 match.homeTeam.ranking = $scope.findRank($scope.ranking, match.idHomeTeam);
                                 match.homeTeam.score = $scope.findScore($scope.ranking, match.idHomeTeam);
                             },
                             function errorCallBack(response) {
                                 console.log('unable to perform request for club infos : ', response);
                             });
-                        $http.get(`https://thesportsdb.com/api/v1/json/${mainService.getKey()}/lookupteam.php?id=${match.idAwayTeam}`).then(
+                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idAwayTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
-                                match.awayTeam = response.data.teams[0];
+                                match.awayTeam = response.data.data;
                                 match.awayTeam.ranking = $scope.findRank($scope.ranking, match.idAwayTeam);
                                 match.awayTeam.score = $scope.findScore($scope.ranking, match.idAwayTeam);
                             },
@@ -72,20 +73,20 @@ angular.module('myApp.schedule', ['ngRoute'])
                     $scope.response = response;
                     $scope.last15 = response.data.events;
                     for (let match of $scope.last15) {
-                        $http.get(`https://thesportsdb.com/api/v1/json/${mainService.getKey()}/lookupteam.php?id=${match.idHomeTeam}`).then(
+                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idHomeTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
-                                match.homeTeam = response.data.teams[0];
+                                match.homeTeam = response.data.data;
                                 match.homeTeam.ranking = $scope.findRank($scope.ranking, match.idHomeTeam);
                                 match.homeTeam.score = $scope.findScore($scope.ranking, match.idHomeTeam);
                             },
                             function errorCallBack(response) {
                                 console.log('unable to perform request for club infos : ', response);
                             });
-                        $http.get(`https://thesportsdb.com/api/v1/json/${mainService.getKey()}/lookupteam.php?id=${match.idAwayTeam}`).then(
+                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idAwayTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
-                                match.awayTeam = response.data.teams[0];
+                                match.awayTeam = response.data.data;
                                 match.awayTeam.ranking = $scope.findRank($scope.ranking, match.idAwayTeam);
                                 match.awayTeam.score = $scope.findScore($scope.ranking, match.idAwayTeam);
                             },
@@ -101,6 +102,15 @@ angular.module('myApp.schedule', ['ngRoute'])
             $scope.cat = function (index) {
                 $scope.show = index;
             };
+            $scope.catMobile = function (index, column) {
+                if ($scope.mshow !== index || $scope.col !== column) {
+                    $scope.mshow = index;
+                    $scope.col = column;
+                } else {
+                    $scope.mshow = -1;
+                    $scope.col = -1;
+                }
+            }
             $scope.hide = function () {
                 $scope.show = -1;
             };

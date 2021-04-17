@@ -7,6 +7,8 @@ router.get('/data', requestHandler.getData);
 
 router.get('/data/:league_id', requestHandler.getDataLeague);
 
+router.get('/clubs/:club_id', requestHandler.getClub);
+
 router.get('/key', requestHandler.getKey);
 
 module.exports = router;

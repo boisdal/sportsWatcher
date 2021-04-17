@@ -11,6 +11,7 @@ const cron = require('node-cron');
 const mongoose = require('mongoose');
 const Data = require('./schemas/Datas.schema');
 const League = require('./schemas/Leagues.schema');
+const Club = require('./schemas/Clubs.schema');
 const request = require("request");
 require('dotenv').config();
 
@@ -44,6 +45,7 @@ cron.schedule('*/15 * * * *', () => {
             console.log(err)
         for (let lea of leagues) {
             fetchGraphData(lea)
+            fetchClubsData(lea)
         }
     });
 }, { scheduled: true, timezone: 'Etc/UTC' });
@@ -207,4 +209,81 @@ function getRandomColor() {
         return getRandomColor();
     }
     return '#' + color;
+}
+
+function fetchClubsData(lea) {
+    request(`https://www.thesportsdb.com/api/v1/json/${process.env.API_KEY}/lookup_all_teams.php?id=${lea.id}`, {json: true}, (err, res, body) => {
+        if (err) {
+            return console.log(err)
+        }
+        let teams = body.teams;
+        for (let team of teams) {
+            createClubData(lea.id, team, teams);
+        }
+    });
+}
+
+function createClubData(id, team, teams) {
+    let next = [];
+    request(`https://www.thesportsdb.com/api/v1/json/${process.env.API_KEY}/eventsnext.php?id=${team.idTeam}`, {json: true}, (err, res, body) => {
+        if (err) {
+            return console.log(err)
+        }
+        let nextMatches = body.events;
+        for (let mat of nextMatches) {
+            let idOpponent;
+            let nameOpponent;
+            if (team.idTeam === mat.idHomeTeam) {
+                idOpponent = mat.idAwayTeam;
+                nameOpponent = mat.strAwayTeam;
+            } else {
+                idOpponent = mat.idHomeTeam;
+                nameOpponent = mat.strHomeTeam;
+            }
+            let opponent = teams.find(e => e.idTeam === idOpponent);
+            if (opponent)
+                next.push({name:nameOpponent, badge: opponent.strTeamBadge});
+        }
+        let last = []
+        request(`https://www.thesportsdb.com/api/v1/json/${process.env.API_KEY}/eventslast.php?id=${team.idTeam}`, {json: true}, (err, res, body) => {
+            if (err) {
+                return console.log(err)
+            }
+            let lastMatches = body.results;
+            for (let mat of lastMatches) {
+                let idOpponent;
+                let nameOpponent;
+                let won;
+                if (team.idTeam === mat.idHomeTeam) {
+                    idOpponent = mat.idAwayTeam;
+                    nameOpponent = mat.strAwayTeam;
+                    if (mat.intHomeScore > mat.intAwayScore)
+                        won = "won";
+                    else if (mat.intAwayScore > mat.intHomeScore)
+                        won = "lost";
+                    else
+                        won = "draw";
+                } else {
+                    idOpponent = mat.idHomeTeam;
+                    nameOpponent = mat.strHomeTeam;
+                    if (mat.intHomeScore > mat.intAwayScore)
+                        won = "lost";
+                    else if (mat.intAwayScore > mat.intHomeScore)
+                        won = "won";
+                    else
+                        won = "draw";
+                }
+                let opponent = teams.find(e => e.idTeam === idOpponent);
+                if (opponent)
+                    last.push({name:nameOpponent, badge: opponent.strTeamBadge, won: won});
+            }
+            saveClubData(id, team, last, next);
+        });
+    });
+}
+
+async function saveClubData(leagueId, team, last, next) {
+    await Club.deleteOne({league_id: leagueId, club_id: team.idTeam});
+    let club = new Club({league_id: leagueId, club_id: team.idTeam, name: team.strTeam, badge: team.strTeamBadge, last: last, next: next});
+    club.save().then(() => {});
 }

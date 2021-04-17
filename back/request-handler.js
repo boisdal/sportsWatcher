@@ -1,5 +1,6 @@
 const League = require('./schemas/Leagues.schema');
 const Data = require('./schemas/Datas.schema');
+const Club = require("./schemas/Clubs.schema");
 require('dotenv').config();
 
 exports.getLeagues = (req, res) => {
@@ -46,6 +47,22 @@ exports.getDataLeague = (req, res) => {
             status: 'success',
             message:'Data retrieved successfully',
             data: dataArray
+        });
+    });
+};
+
+exports.getClub = (req, res) => {
+    Club.get({club_id : req.params.club_id}, function (err, clubArray) {
+        if (err) {
+            res.json({
+                status: 'error',
+                message: err
+            });
+        }
+        res.json({
+            status: 'success',
+            message:'Club retrieved successfully',
+            data: clubArray[0]
         });
     });
 };
