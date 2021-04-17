@@ -42,7 +42,7 @@ angular.module('myApp.schedule', ['ngRoute'])
                     $scope.response = response;
                     $scope.upcoming15 = response.data.events;
                     for (let match of $scope.upcoming15) {
-                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idHomeTeam}`).then(
+                        $http.get(`https://sports.bwadaal.fr/api/clubs/${match.idHomeTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
                                 match.homeTeam = response.data.data;
@@ -52,7 +52,7 @@ angular.module('myApp.schedule', ['ngRoute'])
                             function errorCallBack(response) {
                                 console.log('unable to perform request for club infos : ', response);
                             });
-                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idAwayTeam}`).then(
+                        $http.get(`https://sports.bwadaal.fr/api/clubs/${match.idAwayTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
                                 match.awayTeam = response.data.data;
@@ -73,7 +73,7 @@ angular.module('myApp.schedule', ['ngRoute'])
                     $scope.response = response;
                     $scope.last15 = response.data.events;
                     for (let match of $scope.last15) {
-                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idHomeTeam}`).then(
+                        $http.get(`https://sports.bwadaal.fr/api/clubs/${match.idHomeTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
                                 match.homeTeam = response.data.data;
@@ -83,7 +83,7 @@ angular.module('myApp.schedule', ['ngRoute'])
                             function errorCallBack(response) {
                                 console.log('unable to perform request for club infos : ', response);
                             });
-                        $http.get(`http://sports.bwadaal.fr/api/clubs/${match.idAwayTeam}`).then(
+                        $http.get(`https://sports.bwadaal.fr/api/clubs/${match.idAwayTeam}`).then(
                             function successCallBack(response) {
                                 $scope.response = response;
                                 match.awayTeam = response.data.data;

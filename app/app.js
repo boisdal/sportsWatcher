@@ -15,7 +15,7 @@ angular.module('myApp', [
         var league;
         var leagues;
 
-        $http.get('http://sports.bwadaal.fr/api/key').then(
+        $http.get('https://sports.bwadaal.fr/api/key').then(
             function successCallback(response) {
                 key = response.data.data;
             },
@@ -23,7 +23,7 @@ angular.module('myApp', [
                 console.error(response);
             }
         );
-        $http.get('http://sports.bwadaal.fr/api/leagues').then(
+        $http.get('https://sports.bwadaal.fr/api/leagues').then(
             function successCallback(response) {
                 leagues = response.data.data;
                 league = leagues[0];

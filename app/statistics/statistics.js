@@ -18,7 +18,7 @@ angular.module('myApp.statistics', ['ngRoute'])
         function loadPage($scope, $timeout, $http) {
 
             $scope.show = 0;
-            $http.get(`http://sports.bwadaal.fr/api/data/${$scope.league.id}`).then(
+            $http.get(`https://sports.bwadaal.fr/api/data/${$scope.league.id}`).then(
                 function successCallback(response) {
                     $scope.graphs = response.data.data;
                     $scope.graphsNb = $scope.graphs.length;
